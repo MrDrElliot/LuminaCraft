@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# Folders
+.vs/
+.idea/
+
 # Compiled Object files
 *.slo
 *.lo
