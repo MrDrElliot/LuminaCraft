@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\WorldGen.h.obj",
+            "outputs": [
+                "G:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "G:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Debug\\WorldGen.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "src\\World\\WorldGen.h",
+                    "source-path": "g:\\cpp-projects\\luminacraft\\luminacraft\\src\\world\\worldgen.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

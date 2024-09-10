@@ -1,0 +1,17 @@
+﻿  Application.cpp
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(55,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(55,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(73,28): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(73,19): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(140,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(154,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(218,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(219,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(260,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(261,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(265,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(266,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(267,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(268,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\ScuffedMinecraft-main\ScuffedMinecraft\src\Application.cpp(275,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  ScuffedMinecraft.vcxproj -> H:\Game Development\ScuffedMinecraft-main\x64\Debug\ScuffedMinecraft.exe

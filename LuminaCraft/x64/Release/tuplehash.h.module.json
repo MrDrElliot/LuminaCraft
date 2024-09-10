@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Release\\TupleHash.h.obj",
+            "outputs": [
+                "D:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Release\\vc143.pdb",
+                "x64\\Release\\",
+                "D:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Release\\TupleHash.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "src\\TupleHash.h",
+                    "source-path": "d:\\cpp-projects\\luminacraft\\luminacraft\\src\\tuplehash.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
