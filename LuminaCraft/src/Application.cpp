@@ -66,10 +66,16 @@ FPerformanceMetrics& Application::GetPerformanceMetrics()
 	return Get()->Metrics;
 }
 
+std::shared_ptr<World> Application::GetWorld()
+{
+	return Get()->MainWorld;
+}
+
 
 void Application::InitializeGLFW()
 {
 	glfwInit();
+	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -127,10 +133,10 @@ void Application::Init()
 	glClearColor(0.6f, 0.8f, 1.0f, 1.0f);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	
+	glEnable(GL_MULTISAMPLE);  
+
 	glCullFace(GL_GREATER);
 	glDepthFunc(GL_LESS);
 	

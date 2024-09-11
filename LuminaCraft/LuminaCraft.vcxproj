@@ -80,12 +80,12 @@
     <LibraryPath>C:\dev\C++\ScuffedMinecraft\Dependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\dev\C++\ScuffedMinecraft\Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\C++\ScuffedMinecraft\Dependencies\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\dev\C++\ScuffedMinecraft\Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\C++\ScuffedMinecraft\Dependencies\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -160,7 +160,9 @@
     <ClCompile Include="src\ImGui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Logging\Log.cpp" />
+    <ClCompile Include="src\Physics\Collision\AABB.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
+    <ClCompile Include="src\Renderer\Frustum.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Renderer\ShaderLibrary.cpp" />
     <ClCompile Include="src\WinEntry.cpp" />
@@ -183,17 +185,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Debug\DebugCube.h" />
     <ClInclude Include="src\Events\KeyCodes.h" />
     <ClInclude Include="src\Events\MouseCodes.h" />
     <ClInclude Include="src\ImGui\ImGuiRenderer.h" />
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Logging\Log.h" />
-    <ClInclude Include="src\Physics\Collision\Box.h" />
+    <ClInclude Include="src\Physics\Collision\AABB.h" />
     <ClInclude Include="src\Player\Player.h" />
+    <ClInclude Include="src\Renderer\Frustum.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Renderer\ShaderLibrary.h" />
+    <ClInclude Include="src\Renderer\Vertex.h" />
     <ClInclude Include="src\World\Block.h" />
-    <ClInclude Include="src\World\Blocks.h" />
     <ClInclude Include="src\World\Camera.h" />
     <ClInclude Include="src\World\Chunk.h" />
     <ClInclude Include="src\World\World.h" />

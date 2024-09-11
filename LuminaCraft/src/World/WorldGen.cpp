@@ -3,9 +3,11 @@
 #include <OpenSimplexNoise.hh>
 #include <vector>
 
-#include "Blocks.h"
+#include <glm/glm.hpp>
 
-void WorldGen::GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSize, std::vector<unsigned int>* chunkData)
+#include "Block.h"
+
+void WorldGen::GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSize, std::vector<uint8_t>* chunkData)
 {
     chunkData->reserve(chunkSize * chunkSize * chunkSize);
 
@@ -23,8 +25,9 @@ void WorldGen::GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSi
         for (int z = 0; z < chunkSize; z++)
         {
             // Height calculation
-            float surfaceNoiseValue = surfaceNoise.eval((float)(x + startX) * 0.05f, (float)(z + startZ) * 0.03f);
-            int noiseY = static_cast<int>((surfaceNoiseValue + 1.0f) * 0.5f * 20.0f + 32.0f);
+            float surfaceNoiseValue = surfaceNoise.eval((float)(x + startX) / 32, (float)(z + startZ) * 0.03f);
+
+            int noiseY = static_cast<int>((surfaceNoiseValue + 1.0f) * 0.5f * 10.0f + 32.0f);
 
             // Biome noise
             float biomeNoiseValue = biomeNoise.eval((float)(x + startX) * 0.1f, (float)(z + startZ) * 0.2f);
@@ -32,28 +35,28 @@ void WorldGen::GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSi
 
             for (int y = 0; y < chunkSize; y++)
             {
-                float caveNoiseValue = caveNoise.eval(
-                    (float)(x + startX) * 0.1f,
-                    (float)(y + startY) * 0.1f,
-                    (float)(z + startZ) * 0.1f
+                float caveNoiseValue = caveNoise.eval
+                (
+                    static_cast<float>(x + startX) * 0.1f,
+                    static_cast<float>(y + startY) * 0.1f,
+                    static_cast<float>(z + startZ) * 0.1f
                 );
 
-                // Determine block type
                 if (y + startY > noiseY || caveNoiseValue > 0.5f)
                 {
-                    chunkData->push_back(Blocks::AIR);
+                    chunkData->push_back((uint8_t)Block::EBlockType::AIR);
                 }
                 else if (y + startY == noiseY)
                 {
-                    chunkData->push_back(Blocks::GRASS);
+                    chunkData->push_back((uint8_t)Block::EBlockType::GRASS);
                 }
                 else if (y + startY > noiseY - 5)
                 {
-                    chunkData->push_back(biomeType == 0 ? Blocks::DIRT : Blocks::DIRT); // Different block types for biomes
+                    chunkData->push_back(biomeType == 0 ? (uint8_t)Block::EBlockType::GRASS : (uint8_t)Block::EBlockType::DIRT);
                 }
                 else
                 {
-                    chunkData->push_back(Blocks::STONE);
+                    chunkData->push_back((uint8_t)Block::EBlockType::STONE);
                 }
             }
         }

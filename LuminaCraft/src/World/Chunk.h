@@ -2,40 +2,39 @@
 
 #include <vector>
 #include <thread>
-#include <unordered_map>
 #include <glm/glm.hpp>
 
+struct Vertex;
 struct Block;
 
-struct Vertex
-{
-	char posX, posY, posZ;
-	char texGridX, texGridY;
-
-	Vertex(char _posX, char _posY, char _posZ, char _texGridX, char _texGridY)
-	{
-		posX = _posX;
-		posY = _posY;
-		posZ = _posZ;
-
-		texGridX = _texGridX;
-		texGridY = _texGridY;
-	}
-};
 
 class Chunk
 {
 public:
-	Chunk(unsigned int chunkSize, glm::vec3 chunkPos);
+
+	enum class EDirection { North, South, East, West, Top, Bottom };
+
+	
+	Chunk(uint8_t chunkSize, glm::ivec3 chunkPos);
 	~Chunk();
 
 	void GenerateChunk();
 	void Render(unsigned int modelLoc);
-	
+
+	bool IsFaceVisible(int x, int y, int z, const std::vector<uint8_t>& blockData, const std::vector<uint8_t>& adjacentData, EDirection direction, int chunkSize);
+
+	void GenerateFace(int x, int y, int z, const Block& block, const std::vector<uint8_t>& adjacentData, unsigned int& currentVertex, EDirection direction);
+	void AddFaceVertices(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float x4, float y4, float z4, float uMin, float vMin, float uMax, float vMax, unsigned int& currentVertex);
+	uint8_t GetBlockAtPosition(glm::ivec3 Pos) const;
+
+	static glm::ivec3 WorldToChunkCoords(const glm::vec3& worldPosition, uint8_t chunkSize);
+	static glm::vec3 WorldToLocalChunkCoords(const glm::vec3& worldPosition, const glm::ivec3& chunkPos, uint8_t chunkSize);
 
 public:
-	std::vector<uint32_t> chunkData;
+	
+	std::vector<uint8_t> BlockData;
 	glm::ivec3 chunkPos;
+	
 	bool ready;
 	bool generated;
 

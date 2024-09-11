@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-Block::Block(char minX, char minY, char maxX, char maxY, Blocks::EBlockType InType)
+Block::Block(char minX, char minY, char maxX, char maxY, EBlockType InType)
 {
 	BlockType = InType;
 	
@@ -24,7 +24,7 @@ Block::Block(char minX, char minY, char maxX, char maxY, Blocks::EBlockType InTy
 
 Block::Block(char topMinX, char topMinY, char topMaxX, char topMaxY,
 	char bottomMinX, char bottomMinY, char bottomMaxX, char bottomMaxY,
-	char sideMinX, char sideMinY, char sideMaxX, char sideMaxY, Blocks::EBlockType InType)
+	char sideMinX, char sideMinY, char sideMaxX, char sideMaxY, EBlockType InType)
 {
 	BlockType = InType;
 	this->topMinX = topMinX;
@@ -41,28 +41,4 @@ Block::Block(char topMinX, char topMinY, char topMaxX, char topMaxY,
 	this->sideMinY = sideMinY;
 	this->sideMaxX = sideMaxX;
 	this->sideMaxY = sideMaxY;
-}
-
-Collision::Box Block::GetAABB() const
-{
-	// Compute the overall minimums and maximums
-	float minX = std::min({topMinX, bottomMinX, sideMinX});
-	float minY = std::min({topMinY, bottomMinY, sideMinY});
-	float maxX = std::max({topMaxX, bottomMaxX, sideMaxX});
-	float maxY = std::max({topMaxY, bottomMaxY, sideMaxY});
-
-	// Calculate width and height based on the min and max values
-	float width = maxX - minX;
-	float height = maxY - minY;
-
-	// Create and return the AABB (Box)
-	Collision::Box box;
-	box.x = minX;
-	box.y = minY;
-	box.w = width;
-	box.h = height;
-	box.vx = 0.0f; // Assuming the block is static (no velocity)
-	box.vy = 0.0f;
-
-	return box;
 }

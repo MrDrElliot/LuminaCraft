@@ -26,22 +26,41 @@ public:
 	
 	void Update(double DeltaTime);
 
+	std::shared_ptr<Player> GetPlayer() const;
+	
+	std::shared_ptr<Chunk> GetChunkAtPosition(const glm::vec3& worldPos) const;
+	uint8_t GetBlockAtWorldPosition(const glm::vec3& worldPosition) const;
+
 public:
 
-	unsigned int numChunks = 0;
-	unsigned int numChunksRendered = 0;
+	uint32_t numChunks = 0;
+	uint32_t numChunksRendered = 0;
 
 private:
 
+	/** Name of the world */
 	std::string WorldName;
 
+	/** Player */
 	std::shared_ptr<Player> m_Player;
 
-	std::unordered_map<std::tuple<int, int, int>, Chunk> chunks;
+	/** All chunks currently in memory */
+	std::unordered_map<std::tuple<int, int, int>, std::shared_ptr<Chunk>> chunks;
+
+	/** Chunks awaiting render */
 	std::queue<glm::vec3> chunkQueue;
-	int renderDistance = 16;
-	int renderHeight = 1;
-	unsigned int chunkSize = 32;
-	unsigned int chunksLoading = 0;
+
+	/** Render Distance */
+	int renderDistance = 6;
+
+	/** Render Height */
+	int renderHeight = 4;
+
+	/** How large the chunk is as 3x3 */
+	uint8_t chunkSize = 32;
+
+	/** Number of chunks currently loading */
+	uint32_t chunksLoading = 0;
+	
 	int lastCamX = -100, lastCamY = -100, lastCamZ = -100;
 };

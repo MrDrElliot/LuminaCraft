@@ -2,7 +2,9 @@ H:\Game Development\LuminaCraft\LuminaCraft\src\Application.cpp;H:\Game Developm
 H:\Game Development\LuminaCraft\LuminaCraft\src\ImGui\ImGuiRenderer.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\ImGuiRenderer.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\Input\Input.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\Input.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\Logging\Log.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\Log.obj
+H:\Game Development\LuminaCraft\LuminaCraft\src\Physics\Collision\AABB.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\AABB.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\Player\Player.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\Player.obj
+H:\Game Development\LuminaCraft\LuminaCraft\src\Renderer\Frustum.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\Frustum.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\Renderer\Renderer.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\Renderer.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\Renderer\ShaderLibrary.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\ShaderLibrary.obj
 H:\Game Development\LuminaCraft\LuminaCraft\src\WinEntry.cpp;H:\Game Development\LuminaCraft\LuminaCraft\x64\Debug\WinEntry.obj

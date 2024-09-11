@@ -1,189 +1,74 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (ScuffedMinecraft.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Scanning sources for module dependencies...
-  TupleHash.h
-  WorldGen.h
-  Compiling...
-  TupleHash.h
-  WorldGen.h
   Application.cpp
+  ImGuiRenderer.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'src/Application.cpp')
-  D:\CPP-Projects\LuminaCraft\Dependencies\include\glad\glad.h(32,1):
-  see previous definition of 'APIENTRY'
+  (compiling source file 'src/ImGui/ImGuiRenderer.cpp')
+      H:\Game Development\LuminaCraft\Dependencies\include\GLFW\glfw3.h(123,1):
+      see previous definition of 'APIENTRY'
   
   Input.cpp
-  Log.cpp
   Renderer.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'src/Renderer/Renderer.cpp')
-  D:\CPP-Projects\LuminaCraft\Dependencies\include\glad\glad.h(32,1):
-  see previous definition of 'APIENTRY'
+      H:\Game Development\LuminaCraft\Dependencies\include\glad\glad.h(32,1):
+      see previous definition of 'APIENTRY'
   
-  ShaderLibrary.cpp
   WinEntry.cpp
   Block.cpp
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Block.h(5,19): error C3064: 'uint8_t': must be a simple type or resolve to one
+  (compiling source file 'src/World/Block.cpp')
+  
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Block.h(46,37): error C2061: syntax error: identifier 'uint8_t'
+  (compiling source file 'src/World/Block.cpp')
+  
   Camera.cpp
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Camera.cpp(96,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Camera.cpp(96,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Chunk.cpp
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,62): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,62): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,62): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,62): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,62): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,50): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,50): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,50): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,50): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,50): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,38): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,38): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,38): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,38): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(39,38): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,73): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,73): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,73): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,73): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,73): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,54): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,54): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,54): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,54): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,38): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,38): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,38): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,38): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(42,38): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,73): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,73): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,73): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,73): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,73): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,54): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,54): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,54): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,54): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,38): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,38): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,38): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,38): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(43,38): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,70): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,70): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,70): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,70): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,70): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,54): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,54): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,54): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,54): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,41): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,41): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,41): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,41): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(44,41): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,70): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,70): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,70): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,70): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,70): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,54): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,54): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,54): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,54): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,41): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,41): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,41): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,41): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(45,41): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,70): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,70): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,70): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,70): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,70): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,57): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,57): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,57): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,57): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,38): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,38): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,38): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,38): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(46,38): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,70): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,70): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,70): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,70): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,70): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,57): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,57): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,57): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,57): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,38): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,38): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,38): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,38): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(47,38): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(51,21): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(53,22): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(55,23): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(97,12): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(157,12): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(217,12): warning C4018: '<': signed/unsigned mismatch
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(256,31): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Planet.cpp
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(160,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(160,14): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(160,14): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(160,14): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(160,14): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(161,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(161,14): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(161,14): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(161,14): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(161,14): warning C4244:         ]
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(162,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(162,14): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(162,14): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(162,14): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(162,14): warning C4244:         ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244: 'initializing': conversion from 'T' to '_Ty', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:             T=float
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         and
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:             _Ty=int
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47): warning C4244:         ]
-  (compiling source file 'src/World/Planet.cpp')
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(143,47):
-  the template instantiation context (the oldest one first) is
-  	D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(142,39):
-  	see reference to function template instantiation 'std::tuple<int,int,int>::tuple<T&,T&,T&,0>(_This2,T &,T &) noexcept' being compiled
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'src/World/Chunk.cpp')
+      H:\Game Development\LuminaCraft\Dependencies\include\glad\glad.h(32,1):
+      see previous definition of 'APIENTRY'
+  
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(55,21): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(57,22): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(101,12): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(161,12): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(221,12): warning C4018: '<': signed/unsigned mismatch
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\Chunk.cpp(294,31): warning C4244: 'argument': conversion from 'unsigned __int64' to 'GLsizei', possible loss of data
+  World.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244: 'initializing': conversion from 'T' to '_Ty', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:             T=float
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         and
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47): warning C4244:         ]
+  (compiling source file 'src/World/World.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(143,47):
+      the template instantiation context (the oldest one first) is
+          H:\Game Development\LuminaCraft\LuminaCraft\src\World\World.cpp(99,45):
+          see reference to function template instantiation 'std::tuple<int,int,int>::tuple<T&,T&,T&,0>(_This2,T &,T &) noexcept' being compiled
           with
           [
               T=float,
               _This2=float &
           ]
-  		D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\Planet.cpp(142,39):
-  		see the first reference to 'std::tuple<int,int,int>::tuple' in 'Planet::Update'
-  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(361,16):
-  	see reference to function template instantiation 'std::tuple<int,int,int>::tuple<std::_Exact_args_t,T&,T&,T&,0>(_Tag,_This2,T &,T &)' being compiled
+              H:\Game Development\LuminaCraft\LuminaCraft\src\World\World.cpp(99,45):
+              see the first reference to 'std::tuple<int,int,int>::tuple' in 'World::Update'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(361,16):
+          see reference to function template instantiation 'std::tuple<int,int,int>::tuple<std::_Exact_args_t,T&,T&,T&,0>(_Tag,_This2,T &,T &)' being compiled
           with
           [
               T=float,
               _Tag=std::_Exact_args_t,
               _This2=float &
           ]
-  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(315,102):
-  	see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<T&>(_Other)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\tuple(315,102):
+          see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<T&>(_Other)' being compiled
           with
           [
               _This=int,
@@ -191,54 +76,27 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Other=float &
           ]
   
-  Shader.cpp
   WorldGen.cpp
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(21,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(21,15): warning C4244:         with
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(21,15): warning C4244:         [
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(21,15): warning C4244:             T=float
-D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(21,15): warning C4244:         ]
   Info: Your compiler does not claim C++11 support. Some features may be unavailable.
   Info: Not using <cstdint> for fixed-width integral types. To enable this feature, define OSN_USE_CSTDINT before including this header.
-D:\CPP-Projects\LuminaCraft\Dependencies\include\OpenSimplexNoise.hh(1053,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'src/World/WorldGen.cpp')
-  D:\CPP-Projects\LuminaCraft\Dependencies\include\OpenSimplexNoise.hh(1053,24):
-  the template instantiation context (the oldest one first) is
-  	D:\CPP-Projects\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(24,33):
-  	see reference to function template instantiation 'T OSN::Noise<3>::eval<float>(T,T,T) const' being compiled
-          with
-          [
-              T=float
-          ]
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(46,50): error C2039: 'AIR': is not a member of 'Blocks'
+      H:\Game Development\LuminaCraft\LuminaCraft\src\World\Blocks.h(5,11):
+      see declaration of 'Blocks'
   
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(50,50): error C2039: 'GRASS': is not a member of 'Blocks'
+      H:\Game Development\LuminaCraft\LuminaCraft\src\World\Blocks.h(5,11):
+      see declaration of 'Blocks'
+  
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(54,67): error C2039: 'GRASS': is not a member of 'Blocks'
+      H:\Game Development\LuminaCraft\LuminaCraft\src\World\Blocks.h(5,11):
+      see declaration of 'Blocks'
+  
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(54,83): error C2039: 'DIRT': is not a member of 'Blocks'
+      H:\Game Development\LuminaCraft\LuminaCraft\src\World\Blocks.h(5,11):
+      see declaration of 'Blocks'
+  
+H:\Game Development\LuminaCraft\LuminaCraft\src\World\WorldGen.cpp(58,50): error C2039: 'STONE': is not a member of 'Blocks'
+      H:\Game Development\LuminaCraft\LuminaCraft\src\World\Blocks.h(5,11):
+      see declaration of 'Blocks'
+  
   Generating Code...
-  glad.c
-glfw3.lib(init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(input.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(input.obj)' or at ''; linking object as if no debug info
-glfw3.lib(context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_time.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_time.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_thread.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_thread.obj)' or at ''; linking object as if no debug info
-glfw3.lib(platform.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(platform.obj)' or at ''; linking object as if no debug info
-glfw3.lib(vulkan.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(vulkan.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(wgl_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(wgl_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(egl_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(egl_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(osmesa_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_module.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_module.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_joystick.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_joystick.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_joystick.obj)' or at ''; linking object as if no debug info
-  LuminaCraft.vcxproj -> D:\CPP-Projects\LuminaCraft\x64\Debug\LuminaCraft.exe

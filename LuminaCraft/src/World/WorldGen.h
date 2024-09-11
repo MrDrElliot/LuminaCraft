@@ -4,5 +4,5 @@
 
 namespace WorldGen
 {
-	void GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSize, std::vector<unsigned int>* chunkData);
+	void GenerateChunkData(int chunkX, int chunkY, int chunkZ, int chunkSize, std::vector<uint8_t>* chunkData);
 }

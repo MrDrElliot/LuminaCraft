@@ -5,14 +5,14 @@
         {
             "primary-output": "x64\\Debug\\TupleHash.h.obj",
             "outputs": [
-                "G:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Debug\\vc143.pdb",
+                "H:\\Game Development\\LuminaCraft\\LuminaCraft\\x64\\Debug\\vc143.pdb",
                 "x64\\Debug\\",
-                "G:\\CPP-Projects\\LuminaCraft\\LuminaCraft\\x64\\Debug\\TupleHash.h.ifc"
+                "H:\\Game Development\\LuminaCraft\\LuminaCraft\\x64\\Debug\\TupleHash.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "src\\TupleHash.h",
-                    "source-path": "g:\\cpp-projects\\luminacraft\\luminacraft\\src\\tuplehash.h",
+                    "source-path": "h:\\game development\\luminacraft\\luminacraft\\src\\tuplehash.h",
                     "lookup-method": "absolute"
                 }
             ],

@@ -5,19 +5,19 @@
 #include "../Logging/Log.h"
 #include "../Renderer/ShaderLibrary.h"
 #include <glad/glad.h>
-#include "Blocks.h"
 #include "../Application.h"
 #include "../Player/Player.h"
 
 World::World(std::string InWorldName)
 	:WorldName(std::move(InWorldName))
 {
-	m_Player = std::make_shared<Player>();
+	m_Player = std::make_shared<Player>(this);
 }
 
 World::~World()
 {
-
+    chunkQueue.empty();
+    chunks.empty();
 }
 
 std::shared_ptr<World> World::CreateWorld(const std::string& InWorldName)
@@ -31,19 +31,19 @@ void World::Update(double DeltaTime)
 {
     m_Player->Update(DeltaTime);
     std::shared_ptr<Camera> Camera = m_Player->GetCamera();
-    
+
     glm::mat4 view = Camera->GetViewMatrix();
     glm::mat4 projection = Camera->GetProjectionMatrix();
-    
+
     std::shared_ptr<Shader> PrimaryShader = ShaderLibrary::GetShader("Primary");
-    
+
     const int viewLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "view");
     const int projectionLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "projection");
     const int modelLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "model");
-    
+
     static glm::mat4 lastView = glm::mat4(1.0f);
     static glm::mat4 lastProjection = glm::mat4(1.0f);
-    
+
     if (view != lastView)
     {
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -54,7 +54,7 @@ void World::Update(double DeltaTime)
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
         lastProjection = projection;
     }
-    
+
     glm::vec3 camPos = Camera->GetPosition();
     int camChunkX = static_cast<int>(std::floor(camPos.x / chunkSize));
     int camChunkY = static_cast<int>(std::floor(camPos.y / chunkSize));
@@ -72,21 +72,21 @@ void World::Update(double DeltaTime)
             chunkQueue.emplace(camChunkX, camChunkY, camChunkZ);
         }
 
-        for (int r = 0; r < renderDistance; ++r)
+        // Circular chunk generation
+        for (int r = 0; r <= renderDistance; r++)
         {
-            for (int y = 0; y <= renderHeight; ++y)
+            for (int x = -r; x <= r; x++)
             {
-                chunkQueue.emplace(camChunkX + r, y, camChunkZ);
-                chunkQueue.emplace(camChunkX - r, y, camChunkZ);
-                chunkQueue.emplace(camChunkX, y, camChunkZ + r);
-                chunkQueue.emplace(camChunkX, y, camChunkZ - r);
-
-                if (y > 0)
+                for (int z = -r; z <= r; z++)
                 {
-                    chunkQueue.emplace(camChunkX + r, -y, camChunkZ);
-                    chunkQueue.emplace(camChunkX - r, -y, camChunkZ);
-                    chunkQueue.emplace(camChunkX, -y, camChunkZ + r);
-                    chunkQueue.emplace(camChunkX, -y, camChunkZ - r);
+                    if (x * x + z * z <= r * r)
+                    {
+                        for (int y = 0; y <= renderHeight; y++)
+                        {
+                            chunkQueue.emplace(camChunkX + x, y, camChunkZ + z);
+                            chunkQueue.emplace(camChunkX + x, -y, camChunkZ + z);
+                        }
+                    }
                 }
             }
         }
@@ -96,11 +96,11 @@ void World::Update(double DeltaTime)
         glm::vec3 next = chunkQueue.front();
         chunkQueue.pop();
 
-        std::tuple<int, int, int> chunkTuple{ next.x, next.y, next.z };
+        const std::tuple<int, int, int> chunkTuple{ next.x, next.y, next.z };
 
         if (!chunks.contains(chunkTuple))
         {
-            chunks.try_emplace(chunkTuple, chunkSize, next);
+            chunks.try_emplace(chunkTuple, std::make_shared<Chunk>(chunkSize, next));
         }
     }
 
@@ -110,20 +110,68 @@ void World::Update(double DeltaTime)
     for (auto it = chunks.begin(); it != chunks.end();)
     {
         numChunks++;
-        if (!it->second.ready)
+        if (!it->second->ready)
+        {
             chunksLoading++;
-
-        if (it->second.ready && (abs(it->second.chunkPos.x - camChunkX) > renderDistance ||
-                                 abs(it->second.chunkPos.y - camChunkY) > renderDistance ||
-                                 abs(it->second.chunkPos.z - camChunkZ) > renderDistance))
+        }
+        if (it->second->ready && (glm::distance(glm::vec3(it->second->chunkPos.x, it->second->chunkPos.y, it->second->chunkPos.z), glm::vec3(camChunkX, camChunkY, camChunkZ)) > renderDistance))
         {
             it = chunks.erase(it);
         }
         else
         {
             numChunksRendered++;
-            it->second.Render(modelLoc);
+            it->second->Render(modelLoc);
             ++it;
         }
+
     }
+    
 }
+
+std::shared_ptr<Player> World::GetPlayer() const
+{
+    return m_Player;
+}
+
+std::shared_ptr<Chunk> World::GetChunkAtPosition(const glm::vec3& worldPos) const
+{
+    // Calculate the chunk coordinates from the world position
+    int chunkX = static_cast<int>(std::floor(worldPos.x / chunkSize));
+    int chunkY = static_cast<int>(std::floor(worldPos.y / chunkSize));
+    int chunkZ = static_cast<int>(std::floor(worldPos.z / chunkSize));
+
+    // Create a tuple to represent the chunk coordinates
+    std::tuple<int, int, int> chunkCoord(chunkX, chunkY, chunkZ);
+
+    auto it = chunks.find(chunkCoord);
+    if (it != chunks.end())
+    {
+        return it->second;
+    }
+        
+    return nullptr; 
+}
+
+uint8_t World::GetBlockAtWorldPosition(const glm::vec3& worldPosition) const
+{
+    // Get the chunk at the given world position
+    if (const auto chunk = GetChunkAtPosition(worldPosition))
+    {
+        // Convert world position to local chunk coordinates
+        glm::ivec3 chunkPos = chunk->chunkPos;
+        glm::vec3 localPos = Chunk::WorldToLocalChunkCoords(worldPosition, chunkPos, chunkSize);
+        glm::ivec3 localChunkPos = glm::ivec3(localPos);
+
+        // Ensure localChunkPos is within chunk bounds
+        if (localChunkPos.x >= 0 && localChunkPos.x < chunkSize &&
+            localChunkPos.y >= 0 && localChunkPos.y < chunkSize &&
+            localChunkPos.z >= 0 && localChunkPos.z < chunkSize)
+        {
+            // Get the block at the local position within the chunk
+            return chunk->GetBlockAtPosition(localChunkPos);
+        }
+    }
+    return -1; // Return a default value or handle as needed
+}
+

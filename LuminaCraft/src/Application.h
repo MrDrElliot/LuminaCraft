@@ -37,6 +37,7 @@ public:
 
 	static FApplicationParams& GetApplicationParams();
 	static FPerformanceMetrics& GetPerformanceMetrics();
+	static std::shared_ptr<World> GetWorld();
 
 	void InitializeGLFW();
 	void UpdatePerformanceMetrics(double currentTimeSeconds);
