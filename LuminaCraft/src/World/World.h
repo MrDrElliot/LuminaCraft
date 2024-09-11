@@ -9,6 +9,7 @@
 #include "../TupleHash.h"
 #include "Camera.h"
 
+struct DebugLine;
 struct Block;
 class Player;
 
@@ -30,6 +31,13 @@ public:
 	
 	std::shared_ptr<Chunk> GetChunkAtPosition(const glm::vec3& worldPos) const;
 	uint8_t GetBlockAtWorldPosition(const glm::vec3& worldPosition) const;
+
+	uint8_t Raycast(const glm::vec3& start, const glm::vec3& end, glm::ivec3& hitBlockPos, float maxDistance = 100.0f);
+
+	void UpdateDebugLines(float deltaTime);
+	void RenderDebugLines();
+	void DrawLine(const glm::vec3& start, const glm::vec3& end, const glm::vec3& color);
+
 
 public:
 
@@ -61,6 +69,11 @@ private:
 
 	/** Number of chunks currently loading */
 	uint32_t chunksLoading = 0;
+
+	/** Currently rendered debug lines */
+	std::vector<DebugLine> debugLines;
+	unsigned int lineVAO, lineVBO;
+
 	
 	int lastCamX = -100, lastCamY = -100, lastCamZ = -100;
 };

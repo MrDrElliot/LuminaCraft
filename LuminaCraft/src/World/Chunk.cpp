@@ -118,6 +118,10 @@ void Chunk::Render(unsigned int modelLoc)
 
 	// Draw the chunk using the indices (triangles)
 	glDrawElements(GL_TRIANGLES, numTriangles, GL_UNSIGNED_INT, 0);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
 
 bool Chunk::IsFaceVisible(int x, int y, int z, const std::vector<uint8_t>& blockData, const std::vector<uint8_t>& adjacentData, EDirection direction, int chunkSize)
@@ -197,22 +201,17 @@ void Chunk::AddFaceVertices(float x1, float y1, float z1, float x2, float y2, fl
 
 uint8_t Chunk::GetBlockAtPosition(const glm::ivec3 Pos) const
 {
-	// Ensure the coordinates are within chunk bounds
 	if (Pos.x < 0 || Pos.x >= chunkSize || Pos.y < 0 || Pos.y >= chunkSize || Pos.z < 0 || Pos.z >= chunkSize)
 	{
-		// Coordinates are outside the chunk's bounds
 		return -1;
 	}
 
-	// Calculate the index in the BlockData vector
 	const size_t index = static_cast<size_t>(Pos.x) +
 						 static_cast<size_t>(Pos.y) * chunkSize +
 						 static_cast<size_t>(Pos.z) * chunkSize * chunkSize;
 
-	// Ensure the index is within the bounds of BlockData
 	if (index >= BlockData.size())
 	{
-		// Index is out of bounds for the BlockData vector
 		return -1;
 	}
 

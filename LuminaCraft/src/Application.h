@@ -53,7 +53,7 @@ private:
 	FApplicationParams Params;
 	FPerformanceMetrics Metrics;
 
-	std::shared_ptr<World> MainWorld;
+	std::shared_ptr<World> m_MainWorld;
 	GLFWwindow* ApplicationWindow;
 
 	std::shared_ptr<ImGuiRenderer> m_ImGuiRenderer;

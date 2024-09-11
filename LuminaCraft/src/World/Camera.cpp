@@ -41,6 +41,11 @@ glm::mat4 Camera::GetProjectionMatrix()
     return glm::perspective(glm::radians(FOV), AspectRatio, 0.01f, 10000.0f);
 }
 
+glm::vec3 Camera::GetCameraForwardVector() const
+{
+    return Front;
+}
+
 void Camera::Rotate(float YawOffset, float PitchOffset, float RollOffset, bool LockPitch)
 {
     Yaw += YawOffset;

@@ -68,7 +68,7 @@ FPerformanceMetrics& Application::GetPerformanceMetrics()
 
 std::shared_ptr<World> Application::GetWorld()
 {
-	return Get()->MainWorld;
+	return Get()->m_MainWorld;
 }
 
 
@@ -175,7 +175,7 @@ void Application::Init()
 
 	glfwSetInputMode(ApplicationWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	MainWorld = World::CreateWorld("Elliot World");
+	m_MainWorld = World::CreateWorld("Elliot World");
 	
 
 }
@@ -206,7 +206,7 @@ void Application::Run()
 		Renderer::BeginFrame();
         
 		// Update the main planet
-		MainWorld->Update(Metrics.DeltaTime);
+		m_MainWorld->Update(Metrics.DeltaTime);
 
 		// Update ImGui
 		m_ImGuiRenderer->BeginFrame();

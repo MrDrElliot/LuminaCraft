@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Debug\DebugLine.cpp" />
     <ClCompile Include="src\ImGui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Logging\Log.cpp" />
@@ -186,6 +187,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Debug\DebugCube.h" />
+    <ClInclude Include="src\Debug\DebugLine.h" />
     <ClInclude Include="src\Events\KeyCodes.h" />
     <ClInclude Include="src\Events\MouseCodes.h" />
     <ClInclude Include="src\ImGui\ImGuiRenderer.h" />
@@ -215,6 +217,8 @@
     <ClInclude Include="vendor\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\debug_fragment.glsl" />
+    <None Include="assets\shaders\debug_vertex.glsl" />
     <None Include="assets\shaders\fragment_shader.glsl" />
     <None Include="assets\shaders\vertex_shader.glsl" />
   </ItemGroup>

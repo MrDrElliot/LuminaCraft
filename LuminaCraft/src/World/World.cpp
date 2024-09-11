@@ -7,11 +7,28 @@
 #include <glad/glad.h>
 #include "../Application.h"
 #include "../Player/Player.h"
+#include "../Debug/DebugLine.h"
 
 World::World(std::string InWorldName)
 	:WorldName(std::move(InWorldName))
 {
 	m_Player = std::make_shared<Player>(this);
+
+    std::shared_ptr<Shader> DebugShader = std::make_shared<Shader>("assets/shaders/debug_shader.glsl", "assets/shaders/debug_shader.glsl");
+    ShaderLibrary::PushShader("DebugShader", DebugShader);
+    
+    glGenVertexArrays(1, &lineVAO);
+    glGenBuffers(1, &lineVBO);
+
+    glBindVertexArray(lineVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, lineVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * 2, nullptr, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
 World::~World()
@@ -43,7 +60,8 @@ void World::Update(double DeltaTime)
 
     static glm::mat4 lastView = glm::mat4(1.0f);
     static glm::mat4 lastProjection = glm::mat4(1.0f);
-
+    
+    
     if (view != lastView)
     {
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -126,6 +144,9 @@ void World::Update(double DeltaTime)
         }
 
     }
+
+    UpdateDebugLines(DeltaTime);
+    RenderDebugLines();
     
 }
 
@@ -160,6 +181,7 @@ uint8_t World::GetBlockAtWorldPosition(const glm::vec3& worldPosition) const
     {
         // Convert world position to local chunk coordinates
         glm::ivec3 chunkPos = chunk->chunkPos;
+        
         glm::vec3 localPos = Chunk::WorldToLocalChunkCoords(worldPosition, chunkPos, chunkSize);
         glm::ivec3 localChunkPos = glm::ivec3(localPos);
 
@@ -173,5 +195,147 @@ uint8_t World::GetBlockAtWorldPosition(const glm::vec3& worldPosition) const
         }
     }
     return -1; // Return a default value or handle as needed
+}
+
+uint8_t World::Raycast(const glm::vec3& start, const glm::vec3& end, glm::ivec3& hitBlockPos, float maxDistance)
+{
+
+    DrawLine(start, end, glm::vec3(1.0f, 1.0f, 1.0f));
+    
+    // Step 1: Calculate the direction of the ray
+    glm::vec3 direction = glm::normalize(end - start);
+
+    // Step 2: Initialize the current position
+    glm::ivec3 currentBlock = glm::ivec3(glm::floor(start));
+
+    // Step 3: Calculate delta distances for stepping in each axis
+    glm::vec3 deltaDist
+    (
+        std::abs(1.0f / direction.x),
+        std::abs(1.0f / direction.y),
+        std::abs(1.0f / direction.z)
+    );
+
+    // Step 4: Calculate the step direction and initial side distances
+    glm::ivec3 step;
+    glm::vec3 sideDist;
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (direction[i] < 0)
+        {
+            step[i] = -1;
+            sideDist[i] = (start[i] - currentBlock[i]) * deltaDist[i];
+        }
+        else
+        {
+            step[i] = 1;
+            sideDist[i] = (currentBlock[i] + 1.0f - start[i]) * deltaDist[i];
+        }
+    }
+
+    // Step 5: Ray traversal loop
+    float rayLength = 0.0f;
+    while (rayLength < maxDistance)
+    {
+        // Step 6: Traverse through the grid
+        if (sideDist.x < sideDist.y)
+        {
+            if (sideDist.x < sideDist.z)
+            {
+                currentBlock.x += step.x;
+                rayLength = sideDist.x;
+                sideDist.x += deltaDist.x;
+            }
+            else
+            {
+                currentBlock.z += step.z;
+                rayLength = sideDist.z;
+                sideDist.z += deltaDist.z;
+            }
+        }
+        else
+        {
+            if (sideDist.y < sideDist.z)
+            {
+                currentBlock.y += step.y;
+                rayLength = sideDist.y;
+                sideDist.y += deltaDist.y;
+            }
+            else
+            {
+                currentBlock.z += step.z;
+                rayLength = sideDist.z;
+                sideDist.z += deltaDist.z;
+            }
+        }
+
+        // Step 7: Check if this block is solid (i.e., a block hit)
+        uint8_t blockType = GetBlockAtWorldPosition(currentBlock);
+        if (blockType != 0) {
+            hitBlockPos = currentBlock;
+            return blockType;  // Return the block type of the hit block
+        }
+    }
+
+    // If no block is hit, return 0 (air)
+    return 0;
+}
+
+void World::UpdateDebugLines(float deltaTime)
+{
+    for (auto it = debugLines.begin(); it != debugLines.end();)
+    {
+        it->remainingTime -= deltaTime;
+        if (it->remainingTime <= 0.0f)
+        {
+            it = debugLines.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
+void World::RenderDebugLines()
+{
+    if(std::shared_ptr<Shader> PrimaryShader = ShaderLibrary::GetShader("DebugShader"))
+    {
+        PrimaryShader->Use();
+        GLint viewProjectionLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "viewProjection");
+        GLint lineColorLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "lineColor");
+
+        glUniformMatrix4fv(viewProjectionLoc, 1, GL_FALSE, glm::value_ptr(m_Player->GetCamera()->GetViewProjectionMatrix()));
+
+        glBindVertexArray(lineVAO);
+
+        for (const auto& line : debugLines)
+        {
+            glUniform3fv(lineColorLoc, 1, glm::value_ptr(line.color));
+
+            // Update the VBO with the line vertices (start and end)
+            glm::vec3 vertices[] = { line.start, line.end };
+            glBindBuffer(GL_ARRAY_BUFFER, lineVBO);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+            glDrawArrays(GL_LINES, 0, 2);
+        }
+        
+        glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+}
+
+void World::DrawLine(const glm::vec3& start, const glm::vec3& end, const glm::vec3& color)
+{
+    DebugLine Line;
+    Line.color = color;
+    Line.start = start;
+    Line.end = end;
+    Line.remainingTime = 5.1f;
+    
+    debugLines.emplace_back(Line);
 }
 

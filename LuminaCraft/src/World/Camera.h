@@ -14,6 +14,7 @@ public:
 	glm::vec3 GetPosition() const { return Position; }
 	glm::vec3 GetVelocity() const { return Velocity; }
 	glm::mat4 GetProjectionMatrix();
+	glm::vec3 GetCameraForwardVector() const;
 	
 	void Rotate(float YawOffset, float PitchOffset, float RollOffset, bool LockPitch);
 	void Move(glm::vec3 Direction);
