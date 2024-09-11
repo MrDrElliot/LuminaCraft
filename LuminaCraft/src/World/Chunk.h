@@ -1,5 +1,6 @@
 #pragma once
 
+#include <future>
 #include <vector>
 #include <thread>
 #include <glm/glm.hpp>
@@ -36,7 +37,8 @@ public:
 	glm::ivec3 chunkPos;
 	
 	bool ready;
-	bool generated;
+	std::future<void> Future;
+
 
 private:
 	unsigned int vertexArrayObject;
@@ -45,7 +47,6 @@ private:
 	unsigned long long numTriangles;
 	
 	glm::ivec3 worldPos;
-	std::thread chunkThread;
 
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;

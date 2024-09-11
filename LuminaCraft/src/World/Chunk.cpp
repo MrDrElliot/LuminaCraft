@@ -8,6 +8,7 @@
 #include "Block.h"
 #include "World.h"
 #include "WorldGen.h"
+#include "../Application.h"
 #include "../Logging/Log.h"
 
 Chunk::Chunk(uint8_t chunkSize, glm::ivec3 chunkPos)
@@ -17,17 +18,16 @@ Chunk::Chunk(uint8_t chunkSize, glm::ivec3 chunkPos)
 	worldPos = glm::vec3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, chunkPos.z * chunkSize);
 
 	ready = false;
-	generated = false;
-	chunkThread = std::thread(&Chunk::GenerateChunk, this);
+	
+	Future = Application::GetThreadPool()->submit_task([this]
+	{
+		GenerateChunk();
+	});
 }
 
 Chunk::~Chunk()
 {
-	if (chunkThread.joinable())
-	{
-		chunkThread.join();
-	}
-
+	
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
 	glDeleteVertexArrays(1, &vertexArrayObject);
@@ -66,17 +66,15 @@ void Chunk::GenerateChunk()
 				const Block& block = BlockDictionary[BlockData[index]];
 
 				// Generate faces
-				GenerateFace(x, y, z, block, northData, currentVertex, EDirection::North);
-				GenerateFace(x, y, z, block, southData, currentVertex, EDirection::South);
-				GenerateFace(x, y, z, block, westData, currentVertex, EDirection::West);
-				GenerateFace(x, y, z, block, eastData, currentVertex, EDirection::East);
-				GenerateFace(x, y, z, block, downData, currentVertex, EDirection::Bottom);
-				GenerateFace(x, y, z, block, upData, currentVertex, EDirection::Top);
+				GenerateFace(x, y, z, block, northData, currentVertex,	EDirection::North);
+				GenerateFace(x, y, z, block, southData, currentVertex,	EDirection::South);
+				GenerateFace(x, y, z, block, westData,	currentVertex,	EDirection::West);
+				GenerateFace(x, y, z, block, eastData,	currentVertex,	EDirection::East);
+				GenerateFace(x, y, z, block, downData,	currentVertex,	EDirection::Bottom);
+				GenerateFace(x, y, z, block, upData,	currentVertex,	EDirection::Top);
 			}
 		}
 	}
-
-	generated = true;
 }
 
 
@@ -84,7 +82,7 @@ void Chunk::Render(unsigned int modelLoc)
 {
 	if (!ready)
 	{
-		if (generated)
+		if (Future._Is_ready())
 		{
 			numTriangles = indices.size();
 
@@ -106,6 +104,7 @@ void Chunk::Render(unsigned int modelLoc)
 
 			ready = true;
 		}
+		
 		return;
 	}
 
@@ -118,10 +117,7 @@ void Chunk::Render(unsigned int modelLoc)
 
 	// Draw the chunk using the indices (triangles)
 	glDrawElements(GL_TRIANGLES, numTriangles, GL_UNSIGNED_INT, 0);
-
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+	
 }
 
 bool Chunk::IsFaceVisible(int x, int y, int z, const std::vector<uint8_t>& blockData, const std::vector<uint8_t>& adjacentData, EDirection direction, int chunkSize)

@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "World\World.h"
 #include <memory>
-
+#include "threadpool/BS_thread_pool.hpp"
 #include "ImGui/ImGuiRenderer.h"
 
 struct FApplicationParams
@@ -11,6 +11,7 @@ struct FApplicationParams
 	const char* ApplicationName;
 	int WindowWidth;
 	int WindowHeight;
+	bool vSync = true;
 };
 
 struct FPerformanceMetrics
@@ -34,6 +35,7 @@ public:
 	static std::shared_ptr<Application> Get();
 
 	static GLFWwindow* GetApplicationWindow();
+	static std::shared_ptr<BS::thread_pool> GetThreadPool();
 
 	static FApplicationParams& GetApplicationParams();
 	static FPerformanceMetrics& GetPerformanceMetrics();
@@ -48,6 +50,8 @@ public:
 	
 
 private:
+
+	std::shared_ptr<BS::thread_pool> ThreadPool;
 
 	static std::shared_ptr<Application> s_Application;
 	FApplicationParams Params;

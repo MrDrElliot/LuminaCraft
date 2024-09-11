@@ -34,6 +34,7 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 Application::Application(const FApplicationParams& InParams)
 	: Params(InParams), ApplicationWindow(nullptr)
 {
+	ThreadPool = std::make_shared<BS::thread_pool>();
 }
 
 Application::~Application()
@@ -54,6 +55,11 @@ std::shared_ptr<Application> Application::Get()
 GLFWwindow* Application::GetApplicationWindow()
 {
 	return Get()->ApplicationWindow;
+}
+
+std::shared_ptr<BS::thread_pool> Application::GetThreadPool()
+{
+	return Get()->ThreadPool;
 }
 
 FApplicationParams& Application::GetApplicationParams()
@@ -99,7 +105,7 @@ void Application::UpdatePerformanceMetrics(double currentTimeSeconds)
 void Application::Init()
 {
 	Lumina::Log::Init();
-
+	
 	Renderer::Init();
 	
 	m_ImGuiRenderer = std::make_shared<ImGuiRenderer>();
@@ -116,7 +122,7 @@ void Application::Init()
 
 
 	glfwMakeContextCurrent(ApplicationWindow);
-	glfwSwapInterval(1);
+	glfwSwapInterval(Params.vSync);
 
 	// Initialize GLAD
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

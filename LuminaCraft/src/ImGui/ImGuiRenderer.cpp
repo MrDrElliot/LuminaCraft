@@ -39,8 +39,10 @@ void ImGuiRenderer::Update(double DeltaTime)
 {
     std::shared_ptr<World> World = Application::GetWorld();
     std::shared_ptr<Player> Player = World->GetPlayer();
-    
-    ImGui::Begin("Performance Metrics");
+    ImGui::Begin("Game Stats");
+    ImGui::Checkbox("VSync", &Application::GetApplicationParams().vSync);
+    ImGui::Text("Thread Count: %i", Application::GetThreadPool()->get_thread_count());
+    ImGui::Spacing();
     ImGui::Text("FPS: %f", Application::GetPerformanceMetrics().FPS);
     ImGui::Text("DeltaTime: %f", DeltaTime);
     ImGui::Spacing();
