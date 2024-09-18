@@ -2,10 +2,9 @@
 
 #include <future>
 #include <vector>
-#include <thread>
+#include "../Renderer/Vertex.h"
 #include <glm/glm.hpp>
 
-struct Vertex;
 struct Block;
 
 
@@ -20,7 +19,7 @@ public:
 	~Chunk();
 
 	void GenerateChunk();
-	void Render(unsigned int modelLoc);
+	void Render(int modelLoc);
 
 	bool IsFaceVisible(int x, int y, int z, const std::vector<uint8_t>& blockData, const std::vector<uint8_t>& adjacentData, EDirection direction, int chunkSize);
 
@@ -41,10 +40,10 @@ public:
 
 
 private:
-	unsigned int vertexArrayObject;
-	unsigned int vbo, ebo;
-	uint32_t chunkSize;
-	unsigned long long numTriangles;
+	
+	uint32_t vao, vbo, ebo;
+	int32_t chunkSize;
+	uint64_t numTriangles;
 	
 	glm::ivec3 worldPos;
 

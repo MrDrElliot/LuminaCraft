@@ -6,6 +6,7 @@
 #include "../Application.h"
 #include "../Logging/Log.h"
 #include "../Player/Player.h"
+#include "../Renderer/Renderer.h"
 
 ImGuiRenderer::ImGuiRenderer()
 {
@@ -17,7 +18,6 @@ ImGuiRenderer::~ImGuiRenderer()
 
 void ImGuiRenderer::Init(GLFWwindow* InWindow)
 {
-    // Initialize ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -55,7 +55,10 @@ void ImGuiRenderer::EndFrame()
 {
     ImGui::Render();
 
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    Renderer::Submit([]
+    {
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    });
 }
 
 void ImGuiRenderer::Shutdown()

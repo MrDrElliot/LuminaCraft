@@ -144,7 +144,7 @@ void World::Update(double DeltaTime)
         }
 
     }
-
+    
     UpdateDebugLines(DeltaTime);
     RenderDebugLines();
     
@@ -199,7 +199,6 @@ uint8_t World::GetBlockAtWorldPosition(const glm::vec3& worldPosition) const
 
 uint8_t World::Raycast(const glm::vec3& start, const glm::vec3& end, glm::ivec3& hitBlockPos, float maxDistance)
 {
-
     DrawLine(start, end, glm::vec3(1.0f, 1.0f, 1.0f));
     
     // Step 1: Calculate the direction of the ray
@@ -282,7 +281,7 @@ uint8_t World::Raycast(const glm::vec3& start, const glm::vec3& end, glm::ivec3&
     return 0;
 }
 
-void World::UpdateDebugLines(float deltaTime)
+void World::UpdateDebugLines(double deltaTime)
 {
     for (auto it = debugLines.begin(); it != debugLines.end();)
     {
@@ -300,11 +299,11 @@ void World::UpdateDebugLines(float deltaTime)
 
 void World::RenderDebugLines()
 {
-    if(std::shared_ptr<Shader> PrimaryShader = ShaderLibrary::GetShader("DebugShader"))
+    if(std::shared_ptr<Shader> DebugShader = ShaderLibrary::GetShader("DebugShader"))
     {
-        PrimaryShader->Use();
-        GLint viewProjectionLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "viewProjection");
-        GLint lineColorLoc = glGetUniformLocation(PrimaryShader->GetProgramID(), "lineColor");
+        DebugShader->Use();
+        GLint viewProjectionLoc = glGetUniformLocation(DebugShader->GetProgramID(), "viewProjection");
+        GLint lineColorLoc = glGetUniformLocation(DebugShader->GetProgramID(), "lineColor");
 
         glUniformMatrix4fv(viewProjectionLoc, 1, GL_FALSE, glm::value_ptr(m_Player->GetCamera()->GetViewProjectionMatrix()));
 

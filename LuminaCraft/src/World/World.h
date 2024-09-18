@@ -34,7 +34,7 @@ public:
 
 	uint8_t Raycast(const glm::vec3& start, const glm::vec3& end, glm::ivec3& hitBlockPos, float maxDistance = 100.0f);
 
-	void UpdateDebugLines(float deltaTime);
+	void UpdateDebugLines(double deltaTime);
 	void RenderDebugLines();
 	void DrawLine(const glm::vec3& start, const glm::vec3& end, const glm::vec3& color);
 

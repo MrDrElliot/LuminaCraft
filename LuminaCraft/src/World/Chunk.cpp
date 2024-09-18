@@ -4,12 +4,12 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "../Renderer/Vertex.h"
 #include "Block.h"
 #include "World.h"
 #include "WorldGen.h"
 #include "../Application.h"
 #include "../Logging/Log.h"
+#include "../Renderer/Renderer.h"
 
 Chunk::Chunk(uint8_t chunkSize, glm::ivec3 chunkPos)
 {
@@ -27,10 +27,9 @@ Chunk::Chunk(uint8_t chunkSize, glm::ivec3 chunkPos)
 
 Chunk::~Chunk()
 {
-	
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
-	glDeleteVertexArrays(1, &vertexArrayObject);
+	glDeleteVertexArrays(1, &vao);
 }
 
 void Chunk::GenerateChunk()
@@ -78,7 +77,7 @@ void Chunk::GenerateChunk()
 }
 
 
-void Chunk::Render(unsigned int modelLoc)
+void Chunk::Render(int modelLoc)
 {
 	if (!ready)
 	{
@@ -86,38 +85,19 @@ void Chunk::Render(unsigned int modelLoc)
 		{
 			numTriangles = indices.size();
 
-			glGenVertexArrays(1, &vertexArrayObject);
-			glBindVertexArray(vertexArrayObject);
-
-			glGenBuffers(1, &vbo);
-			glBindBuffer(GL_ARRAY_BUFFER, vbo);
-			glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
-
-			glVertexAttribPointer(0, 3, GL_BYTE, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, posX));
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 2, GL_BYTE, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texGridX));
-			glEnableVertexAttribArray(1);
-
-			glGenBuffers(1, &ebo);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
+			Renderer::CreateBuffers(vertices, indices, vao, vbo, ebo);
+			
 			ready = true;
 		}
-		
 		return;
 	}
 
-	// Bind VAO to render the chunk
-	glBindVertexArray(vertexArrayObject);
 
 	// Model transformation: translating the chunk to its correct world position
-	glm::mat4 model = glm::translate(glm::mat4(1.0f), (glm::vec3)worldPos);
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glm::mat4 model = glm::mat4(1.0f);
+	model = translate(model, static_cast<glm::vec3>(worldPos));
 
-	// Draw the chunk using the indices (triangles)
-	glDrawElements(GL_TRIANGLES, numTriangles, GL_UNSIGNED_INT, 0);
-	
+	Renderer::DrawIndexed(modelLoc, model, vao, numTriangles);
 }
 
 bool Chunk::IsFaceVisible(int x, int y, int z, const std::vector<uint8_t>& blockData, const std::vector<uint8_t>& adjacentData, EDirection direction, int chunkSize)
